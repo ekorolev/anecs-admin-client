@@ -1,2 +1,2 @@
-export const CHANGE_FILTER = 'CHANGE_FILTER'
-export const ADD_ITEM = 'ADD_ITEM'
+// Authentication actions
+export const SET_CREDENTIALS = 'SET_CREDENTIALS'

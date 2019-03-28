@@ -5,6 +5,9 @@ import { createStore } from 'redux'
 import reducers from './reducers'
 
 import AnecdotesPage from './pages/AnecdotesPage'
+import PagesPage from './pages/PagesPage'
+import LoginPage from './pages/LoginPage/LoginPage'
+import RegisterPage from './pages/RegisterPage/RegisterPage'
 
 const store = createStore(reducers)
 
@@ -14,8 +17,10 @@ class App extends Component {
       <Provider store={store}>
         <Switch>
           <Route exact path="/" render={() => (<Redirect to="/anecdotes"/>)} />
-          <Route path="/login" render={() => (<div>Login</div>)} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={RegisterPage} />
           <Route path="/anecdotes" component={AnecdotesPage} />
+          <Route path="/pages" component={PagesPage} />
         </Switch>
       </Provider>
     )

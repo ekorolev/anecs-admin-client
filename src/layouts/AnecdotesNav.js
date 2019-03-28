@@ -1,15 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import { Nav } from 'react-bootstrap'
 
-export default class AnecdotesNav extends Component {
-  render () {
-    return (
-      <div>Privet</div>
-      // <Nav className="flex-column">
-      //   <Nav.Link>Show all anecdotes</Nav.Link>
-      //   <Nav.Link>Create anecdote</Nav.Link>
-      // </Nav>
-    )
-  }
+const AnecdotesNav = function() {
+  return (
+    <Nav className="flex-column">
+      <Nav.Link>Show all anecdotes</Nav.Link>
+      <Nav.Link>Create an anecdote</Nav.Link>
+    </Nav>
+  )
 }
+
+export default AnecdotesNav
