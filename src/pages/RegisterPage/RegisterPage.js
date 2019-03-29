@@ -1,7 +1,7 @@
 import React from 'react'
 import './registerPage.scss'
 
-import RegisterForm from '../../components/RegisterForm'
+import RegisterForm from '../../components/auth/RegisterForm'
 
 const RegisterPage = function ({ history }) {
 

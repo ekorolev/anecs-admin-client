@@ -16,10 +16,14 @@ const MainLayout = function(props) {
       <Container fluid>
         <Row>
           <Col xl={2} md={3}>
-            {props.sideNav}
+            <Container>
+              {props.sideNav}
+            </Container>
           </Col>
           <Col xl={10} md={9}>
-            {props.children}
+            <Container>
+              {props.children}
+            </Container>
           </Col>
         </Row>
       </Container>

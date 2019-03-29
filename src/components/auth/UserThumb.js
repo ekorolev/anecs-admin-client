@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 
 class UserThumb extends React.Component {
   render() {
-    const LogoutLink = <a href="javascript:;" onClick={this.props.onLogout}>Logout</a>
+    const LogoutLink = <button className="btn btn-info btn-sm" onClick={this.props.onLogout}>Logout</button>
     if (this.props.isLoggedIn) {
       return (
-        <span>Signed in as {this.props.user.username} | {LogoutLink}</span>
+        <span>Signed in as {this.props.user.username} {LogoutLink}</span>
       )
     } else {
       return <span><Link to="/login">Login</Link> or <Link to="/register">register</Link></span>

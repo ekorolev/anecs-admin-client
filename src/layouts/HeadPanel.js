@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import UserThumb from '../components/UserThumb'
+import UserThumb from '../components/auth/UserThumb'
 import {
   logout
 } from '../actions/AuthActions'

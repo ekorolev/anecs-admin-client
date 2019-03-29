@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import './loginPage.scss'
 import { login } from '../../actions/AuthActions'
 
-import LoginForm from '../../components/LoginForm'
+import LoginForm from '../../components/auth/LoginForm'
 
 const LoginPage = function ({ history, login, isLoading, errors, user }) {
   const onSubmit = async (username, password) => {

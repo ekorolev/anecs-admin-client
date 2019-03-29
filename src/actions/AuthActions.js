@@ -50,5 +50,5 @@ export const logout = (accessToken) => async dispatch => {
   dispatch(setCredentials({}))
   localStorage.removeItem('credentials')
   localStorage.removeItem('user')
-  logout(accessToken)
+  apiLogout(accessToken)
 }
