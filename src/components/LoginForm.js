@@ -16,6 +16,12 @@ class LoginForm extends React.Component {
     }
   }
 
+  componentWillReceiveProps () {
+    this.setState({
+      errors: this.props.errors || {}
+    })
+  }
+
   onFieldChanged (event) {
     this.setState({
       [event.target.name]: event.target.value
@@ -28,9 +34,13 @@ class LoginForm extends React.Component {
   }
 
   render () {
+    let Title = this.props.isLoading
+      ? <h1>Sign in (Loading...)</h1>
+      : <h1>Sign in</h1>
+
     return (
       <Form onSubmit={this.handleSubmit.bind(this)}>
-        <h1>Sign in</h1>
+        {Title}
         <Form.Group controlId="formBasicEmail">
           <Form.Control
             name="username"
@@ -55,7 +65,9 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  errors: PropTypes.object
 }
 
 export default LoginForm

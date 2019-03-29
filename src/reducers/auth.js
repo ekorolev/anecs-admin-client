@@ -1,25 +1,45 @@
+import { combineReducers } from 'redux' 
+
 import {
-  SET_CREDENTIALS
+  SET_CREDENTIALS,
+  SET_USER
 } from '../constants/ActionTypes.js'
 
-const initialState = {
+const initialCredentialsState = {
   accessToken: null,
-  refreshToken: null,
-  isAuthenticated: false,
-  errors: {},
-  user: {}
+  refreshToken: null
 }
 
-export default function example(state = initialState, action) {
+const credentials = (state = initialCredentialsState, action) => {
   switch (action.type) {
     case SET_CREDENTIALS:
       return {
-        isAuthenticated: !!action.payload.accessToken,
         accessToken: action.payload.accessToken,
-        refreshToken: action.payload.refreshToken,
-        user: action.payload.user
+        refreshToken: action.payload.refreshToken
       }
     default:
       return state
   }
 }
+
+const initialUserState = {
+  username: null,
+  isLoggedIn: false
+}
+
+const user = (state = initialUserState, action) => {
+  switch (action.type) {
+    case SET_USER:
+      return {
+        isLoggedIn: !!action.payload.username,
+        username: action.payload.username
+      }
+    default:
+      return state
+  }
+}
+
+export default combineReducers({
+  user,
+  credentials
+})

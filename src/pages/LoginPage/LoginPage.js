@@ -1,12 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import './loginPage.scss'
-import { authenticate } from '../../actions/AuthActions'
+import { login } from '../../actions/AuthActions'
 
 import LoginForm from '../../components/LoginForm'
 
-const LoginPage = function ({ history, login }) {
-
+const LoginPage = function ({ history, login, isLoading, errors, user }) {
   const onSubmit = async (username, password) => {
     await login(username, password)
     history.push('/')
@@ -16,6 +15,8 @@ const LoginPage = function ({ history, login }) {
     <div className="screen-center">
       <div className="login-form">
         <LoginForm
+          isLoading={isLoading}
+          errors={errors}
           onSubmit={onSubmit}/>
       </div>
     </div>
@@ -24,8 +25,13 @@ const LoginPage = function ({ history, login }) {
 
 const mapDispatchToProps = dispatch => ({
   async login (username, password) {
-    dispatch(await authenticate(username, password))
+    await dispatch(login(username, password))
   }
 })
 
-export default connect(null, mapDispatchToProps)(LoginPage)
+const mapStateToProps = state => ({
+  isLoading: state.ui.isAuthLoading,
+  errors: state.ui.authErrors
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
