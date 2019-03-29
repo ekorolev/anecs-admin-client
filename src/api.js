@@ -37,7 +37,7 @@ const gen = (i = -1) => ({
 })
 
 const data = []
-for (let i = 0; i < 55; i++) data.push(gen(i))
+for (let i = 0; i < 41; i++) data.push(gen(i))
 export const getAnecdotes = async() => {
   await sleep(rnd(100,500))
   return {

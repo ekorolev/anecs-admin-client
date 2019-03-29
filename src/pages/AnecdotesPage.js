@@ -7,8 +7,14 @@ import PaginationBar from '../components/PaginationBar'
 import { loadAnecdotes } from '../actions/AnecdotesActions'
 
 class AnecdotesPage extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      pageSize: 10
+    }
+  }
   async componentWillMount () {
-    if (!this.props.anecdotes.options.pageIsLoaded) {
+    if (this.props.anecdotes.length === 0) {
       await this.props.loadAnecdotes()
     }
   }
@@ -17,21 +23,21 @@ class AnecdotesPage extends React.Component {
   }
   render () {
     const page = parseInt(this.props.match.params.page || 0)
-    const visibleAnecdotes = this.props.anecdotes.items.slice(
-      page * this.props.anecdotes.options.pageSize,
-      (page + 1) * this.props.anecdotes.options.pageSize
+    const visibleAnecdotes = this.props.anecdotes.slice(
+      page * this.state.pageSize,
+      (page + 1) * this.state.pageSize
     )
     return (
       <MainLayout sideNav={<AnecdotesNav/>}>
-        { !this.props.anecdotes.options.pageIsLoading ?
+        { !this.props.isLoading ?
           visibleAnecdotes.length > 0 ? (
             <div>
               <AnecdoteList anecdotes={visibleAnecdotes}/>
               <PaginationBar
                 onPageSelect={this.onPageSelect.bind(this)}
                 currentPageNumber={parseInt(this.props.match.params.page || 0)}
-                itemsAmount={this.props.anecdotes.options.count}
-                pageSize={this.props.anecdotes.options.pageSize}/>
+                itemsAmount={this.props.count}
+                pageSize={this.state.pageSize}/>
             </div>
           ) : (
             <p>There aren't anecdotes</p>
@@ -45,7 +51,9 @@ class AnecdotesPage extends React.Component {
 }
 
 export default connect(state => ({
-  anecdotes: state.anecdotes
+  anecdotes: state.anecdotes.anecdotes,
+  count: state.anecdotes.count,
+  isLoading: state.anecdotes.isLoading
 }), dispatch => ({
   loadAnecdotes: async () => dispatch(loadAnecdotes())
 }))(AnecdotesPage)

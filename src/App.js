@@ -13,7 +13,8 @@ const store = configureStore({
   auth: {
     user: JSON.parse(localStorage.getItem('user') || '{}'),
     credentials: JSON.parse(localStorage.getItem('credentials') || '{}')
-  }
+  },
+  anecdotes: JSON.parse(localStorage.getItem('anecdotes') || '{}')
 })
 
 class App extends Component {

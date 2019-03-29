@@ -1,9 +1,7 @@
 import {
   SET_ANECDOTES,
-  SET_PAGE,
-  PAGE_IS_LOADED,
-  PAGE_IS_LOADING,
-  SET_ANECDOTES_COUNT
+  SET_ANECDOTES_COUNT,
+  SET_ANECDOTES_LOADING
 } from '../constants/ActionTypes'
 import { getAnecdotes } from '../api'
 
@@ -12,31 +10,21 @@ export const setAnecdotes = anecdotes => ({
   payload: anecdotes
 })
 
-export const setPageIsLoaded = isLoaded => ({
-  type: PAGE_IS_LOADED,
-  payload: isLoaded
-})
-
-export const setPageIsLoading = isLoading => ({
-  type: PAGE_IS_LOADING,
-  payload: isLoading
-})
-
-export const setPageNumber = number => ({
-  type: SET_PAGE,
-  payload: number
-})
-
 export const setAnecdotesCount = count => ({
   type: SET_ANECDOTES_COUNT,
   payload: count
 })
 
+export const setAnecdotesLoading = value => ({
+  type: SET_ANECDOTES_LOADING,
+  payload: value
+})
+
 export const loadAnecdotes = () => async dispatch => {
-  dispatch(setPageIsLoading(true))
+  dispatch(setAnecdotesLoading(true))
   const res = await getAnecdotes()
+  localStorage.setItem('anecdotes', JSON.stringify(res))
   dispatch(setAnecdotes(res.anecdotes))
   dispatch(setAnecdotesCount(res.count))
-  dispatch(setPageIsLoading(false))
-  dispatch(setPageIsLoaded(true))
+  dispatch(setAnecdotesLoading(false))
 }
