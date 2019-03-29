@@ -24,7 +24,7 @@ class App extends Component {
           <Route exact path="/" render={() => (<Redirect to="/anecdotes"/>)} />
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={RegisterPage} />
-          <PrivateRoute path="/anecdotes" component={AnecdotesPage} />
+          <PrivateRoute path="/anecdotes/:page?" component={AnecdotesPage} />
           <PrivateRoute path="/pages" component={PagesPage} />
         </Switch>
       </Provider>

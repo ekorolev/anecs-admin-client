@@ -5,6 +5,7 @@ import {
   PAGE_IS_LOADING,
   SET_ANECDOTES_COUNT
 } from '../constants/ActionTypes'
+import { getAnecdotes } from '../api'
 
 export const setAnecdotes = anecdotes => ({
   type: SET_ANECDOTES,
@@ -30,3 +31,12 @@ export const setAnecdotesCount = count => ({
   type: SET_ANECDOTES_COUNT,
   payload: count
 })
+
+export const loadAnecdotes = () => async dispatch => {
+  dispatch(setPageIsLoading(true))
+  const res = await getAnecdotes()
+  dispatch(setAnecdotes(res.anecdotes))
+  dispatch(setAnecdotesCount(res.count))
+  dispatch(setPageIsLoading(false))
+  dispatch(setPageIsLoaded(true))
+}
