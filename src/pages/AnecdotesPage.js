@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import MainLayout from '../layouts/MainLayout'
 import AnecdotesNav from '../layouts/AnecdotesNav'
-import AnecdoteList from '../components/anecdotes/AnecdoteList'
 import PaginationBar from '../components/PaginationBar'
-import { loadAnecdotes } from '../actions/AnecdotesActions'
+import AnecdotesItem from '../components/anecdotes/AnecdoteItem'
+import { loadAnecdotes, removeAnecdote } from '../actions/AnecdotesActions'
 
 class AnecdotesPage extends React.Component {
   constructor() {
@@ -21,18 +21,30 @@ class AnecdotesPage extends React.Component {
   onPageSelect (page) {
     this.props.history.push(`/anecdotes/${page}`)
   }
+  onSelectAnecdote (id) {
+    console.log(`Select anecdotes: ${id}`)
+  }
   render () {
     const page = parseInt(this.props.match.params.page || 0)
-    const visibleAnecdotes = this.props.anecdotes.slice(
+    const visibleAnecdotes = this.props.anecdotes
+    .slice(
       page * this.state.pageSize,
       (page + 1) * this.state.pageSize
     )
+    .map(anec =>
+      <AnecdotesItem
+        key={anec._id}
+        onSelect={this.onSelectAnecdote.bind(this)}
+        onDelete={this.props.removeAnecdote}
+        data={anec}/>
+    )
+    
     return (
       <MainLayout sideNav={<AnecdotesNav/>}>
         { !this.props.isLoading ?
           visibleAnecdotes.length > 0 ? (
             <div>
-              <AnecdoteList anecdotes={visibleAnecdotes}/>
+              {visibleAnecdotes}
               <PaginationBar
                 onPageSelect={this.onPageSelect.bind(this)}
                 currentPageNumber={parseInt(this.props.match.params.page || 0)}
@@ -55,5 +67,6 @@ export default connect(state => ({
   count: state.anecdotes.count,
   isLoading: state.anecdotes.isLoading
 }), dispatch => ({
-  loadAnecdotes: async () => dispatch(loadAnecdotes())
+  loadAnecdotes: async () => dispatch(loadAnecdotes()),
+  removeAnecdote: async (id) => dispatch(removeAnecdote(id))
 }))(AnecdotesPage)

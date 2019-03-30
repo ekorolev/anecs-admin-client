@@ -45,3 +45,10 @@ export const getAnecdotes = async() => {
     anecdotes: data
   }
 }
+
+export const deleteAnecdote = async id => {
+  await sleep(rnd(3000, 5000))
+  return {
+    message: 'OK'
+  }
+}

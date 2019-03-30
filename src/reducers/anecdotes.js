@@ -1,7 +1,10 @@
 import {
   SET_ANECDOTES,
   SET_ANECDOTES_COUNT,
-  SET_ANECDOTES_LOADING
+  SET_ANECDOTES_LOADING,
+  DELETE_ANECDOTE,
+  SET_ANECDOTE_LOADING,
+  DECREMENT_ANECDOTES_COUNT
 } from '../constants/ActionTypes'
 import { combineReducers } from 'redux'
 
@@ -11,6 +14,15 @@ const anecdotes = (state = [], action) => {
       return [
         ...action.payload
       ]
+    case DELETE_ANECDOTE:
+      return state.filter(item => item._id !== action.payload)
+    case SET_ANECDOTE_LOADING:
+      return state.map(anec => {
+        if (anec._id === action.payload.id) {
+          anec.isLoading = action.payload.isLoading
+        }
+        return Object.assign({}, anec)
+      })
     default:
       return state
   }
@@ -20,6 +32,8 @@ const count = (state = 0, action) => {
   switch (action.type) {
     case SET_ANECDOTES_COUNT:
       return action.payload
+    case DECREMENT_ANECDOTES_COUNT:
+      return --state
     default:
       return state
   }
