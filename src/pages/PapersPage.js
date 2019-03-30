@@ -27,7 +27,7 @@ class PapersPage extends React.Component {
       (page + 1) * this.state.pageSize
     )
     .map(paper => <PaperItem
-      onSelect={(id) => this.props.history.push(`/page/show/${id}`)}
+      onSelect={(id) => this.props.history.push(`/papers/show/${id}`)}
       onDelete={this.props.deletePaper}
       key={paper._id} 
       data={paper}/>

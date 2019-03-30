@@ -10,6 +10,7 @@ import LoginPage from './pages/LoginPage/LoginPage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
 import AnecdoteViewPage from './pages/AnecdoteViewPage'
 import AnecdoteCreate from './pages/AnecdoteCreatePage'
+import PaperViewPage from './pages/PaperViewPage'
 
 const store = configureStore({
   auth: {
@@ -31,6 +32,7 @@ class App extends Component {
           <PrivateRoute path="/anecdotes/create" component={AnecdoteCreate} />
           <PrivateRoute path="/anecdotes/show/:id" component={AnecdoteViewPage} />
           <PrivateRoute path="/anecdotes/:page?" component={AnecdotesPage} />
+          <PrivateRoute path="/papers/show/:id" component={PaperViewPage} />
           <PrivateRoute path="/papers/:page?" component={PapersPage} />
         </Switch>
       </Provider>
