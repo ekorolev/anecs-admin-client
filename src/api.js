@@ -28,7 +28,7 @@ Lorem Ipsum passages, and more recently with desktop publishing software like Al
 `
 
 const gen = (i = -1) => ({
-  _id: `${Math.random()*1000000+1000000}${Date.now()}`,
+  _id: `${Math.floor(Math.random()*1000000)+1000000}ADG${Date.now()}`,
   author: 'admin',
   createdAt: Date.now(),
   publishedAt: Date.now(),
@@ -47,7 +47,21 @@ export const getAnecdotes = async() => {
 }
 
 export const deleteAnecdote = async id => {
-  await sleep(rnd(3000, 5000))
+  await sleep(rnd(500, 1000))
+  return {
+    message: 'OK'
+  }
+}
+
+export const getAnecdote = async id => {
+  await sleep(rnd(1000, 1500))
+  const anec = gen(rnd(1000,10000))
+  anec._id = id
+  return anec
+}
+
+export const saveAnecdote = async (id, update) => {
+  await sleep(rnd(1000, 1200))
   return {
     message: 'OK'
   }

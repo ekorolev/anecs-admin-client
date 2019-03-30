@@ -4,7 +4,8 @@ import {
   SET_ANECDOTES_LOADING,
   DELETE_ANECDOTE,
   SET_ANECDOTE_LOADING,
-  DECREMENT_ANECDOTES_COUNT
+  DECREMENT_ANECDOTES_COUNT,
+  UPDATE_ANECDOTE
 } from '../constants/ActionTypes'
 import { combineReducers } from 'redux'
 
@@ -20,6 +21,13 @@ const anecdotes = (state = [], action) => {
       return state.map(anec => {
         if (anec._id === action.payload.id) {
           anec.isLoading = action.payload.isLoading
+        }
+        return Object.assign({}, anec)
+      })
+    case UPDATE_ANECDOTE:
+      return state.map(anec => {
+        if (anec._id === action.payload.id) {
+          anec = { ...anec, ...action.payload.update }
         }
         return Object.assign({}, anec)
       })

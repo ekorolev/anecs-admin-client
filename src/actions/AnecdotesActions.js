@@ -4,11 +4,13 @@ import {
   SET_ANECDOTES_LOADING,
   SET_ANECDOTE_LOADING,
   DELETE_ANECDOTE,
-  DECREMENT_ANECDOTES_COUNT
+  DECREMENT_ANECDOTES_COUNT,
+  UPDATE_ANECDOTE
 } from '../constants/ActionTypes'
 import {
   getAnecdotes,
-  deleteAnecdote as deleteAnecdoteApi
+  deleteAnecdote as deleteAnecdoteApi,
+  saveAnecdote as saveAnecdoteApi
 } from '../api'
 
 export const setAnecdotes = anecdotes => ({
@@ -43,6 +45,14 @@ export const setAnecdoteLoading = (id, value) => ({
   }
 })
 
+export const updateAnecdote = (id, update) => ({
+  type: UPDATE_ANECDOTE,
+  payload: {
+    id,
+    update
+  }
+})
+
 export const loadAnecdotes = () => async dispatch => {
   dispatch(setAnecdotesLoading(true))
   const res = await getAnecdotes()
@@ -53,10 +63,16 @@ export const loadAnecdotes = () => async dispatch => {
 }
 
 export const removeAnecdote = id => async dispatch => {
-  console.log(`Delete anecdote ${id}`)
   dispatch(setAnecdoteLoading(id, true))
   await deleteAnecdoteApi(id)
   dispatch(setAnecdoteLoading(id, false))
   dispatch(deleteAnecdote(id))
   dispatch(decrementCount())
+}
+
+export const saveAnecdote = (id, update) => async dispatch => {
+  dispatch(setAnecdoteLoading(id, true))
+  await saveAnecdoteApi(id, update)
+  dispatch(updateAnecdote(id, update))
+  dispatch(setAnecdoteLoading(id, false))
 }

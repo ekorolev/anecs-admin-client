@@ -1,12 +1,12 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 import { Nav } from 'react-bootstrap'
 
 const AnecdotesNav = function() {
   return (
     <Nav className="flex-column">
-      <Nav.Link>Show all anecdotes</Nav.Link>
-      <Nav.Link>Create an anecdote</Nav.Link>
+      <Link to="/anecdotes/">Show all anecdotes</Link>
+      <Link to="/anecdotes/create">Create an anecdote</Link>
     </Nav>
   )
 }

@@ -22,7 +22,7 @@ class AnecdotesPage extends React.Component {
     this.props.history.push(`/anecdotes/${page}`)
   }
   onSelectAnecdote (id) {
-    console.log(`Select anecdotes: ${id}`)
+    this.props.history.push(`/anecdotes/show/${id}`)
   }
   render () {
     const page = parseInt(this.props.match.params.page || 0)
