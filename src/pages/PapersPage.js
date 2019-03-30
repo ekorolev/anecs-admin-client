@@ -26,7 +26,12 @@ class PapersPage extends React.Component {
       page * this.state.pageSize,
       (page + 1) * this.state.pageSize
     )
-    .map(paper => <PaperItem key={paper._id} data={paper}/>)
+    .map(paper => <PaperItem
+      onSelect={(id) => this.props.history.push(`/page/show/${id}`)}
+      onDelete={this.props.deletePaper}
+      key={paper._id} 
+      data={paper}/>
+    )
 
     return (
       <MainLayout sideNav={<PapersNav/>}>
@@ -44,5 +49,6 @@ class PapersPage extends React.Component {
 export default connect(state => ({
   papers: state.papers.items
 }), dispatch => ({
-  loadPapers: () => dispatch(PapersActions.loadPapers())
+  loadPapers: () => dispatch(PapersActions.loadPapers()),
+  deletePaper: id => dispatch(PapersActions.removePaper(id))
 }))(PapersPage)
