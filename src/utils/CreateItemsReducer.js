@@ -28,19 +28,6 @@ export default (itemsName) => {
         return state
     }
   }
-
-  const count = (state = 0, action) => {
-    switch (action.type) {
-      case Constants.SET_ITEMS_AMOUNT:
-        return action.payload
-      case Constants.DECREMENT_ITEMS_AMOUNT:
-        return --state
-      case Constants.INCREMENT_ITEMS_AMOUNT:
-        return ++state
-      default:
-        return state
-    }
-  }
   
   const isLoading = (state = false, action) => {
     switch (action.type) {
@@ -53,7 +40,6 @@ export default (itemsName) => {
   
   return combineReducers({
     items,
-    count,
     isLoading
   })
 }

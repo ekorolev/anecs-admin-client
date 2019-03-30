@@ -14,7 +14,7 @@ import {
   deleteAnecdote as deleteAnecdoteApi,
   saveAnecdote as saveAnecdoteApi,
   createAnecdote as createAnecdoteApi
-} from '../api'
+} from '../api/anecdotes'
 
 export const setAnecdotes = anecdotes => ({
   type: SET_ANECDOTES,

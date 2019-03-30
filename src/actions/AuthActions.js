@@ -9,7 +9,7 @@ import {
 import {
   login as apiLogin,
   logout as apiLogout
-} from '../api'
+} from '../api/auth'
 
 export const setCredentials = (credentials) => ({
   type: SET_CREDENTIALS,

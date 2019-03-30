@@ -16,7 +16,8 @@ const store = configureStore({
     user: JSON.parse(localStorage.getItem('user') || '{}'),
     credentials: JSON.parse(localStorage.getItem('credentials') || '{}')
   },
-  anecdotes: JSON.parse(localStorage.getItem('anecdotes') || '{}')
+  anecdotes: JSON.parse(localStorage.getItem('anecdotes') || '{}'),
+  papers: JSON.parse(localStorage.getItem('papers') || '{}')
 })
 
 class App extends Component {
@@ -30,7 +31,7 @@ class App extends Component {
           <PrivateRoute path="/anecdotes/create" component={AnecdoteCreate} />
           <PrivateRoute path="/anecdotes/show/:id" component={AnecdoteViewPage} />
           <PrivateRoute path="/anecdotes/:page?" component={AnecdotesPage} />
-          <PrivateRoute path="/papers" component={PapersPage} />
+          <PrivateRoute path="/papers/:page?" component={PapersPage} />
         </Switch>
       </Provider>
     )

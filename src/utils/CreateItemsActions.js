@@ -16,20 +16,12 @@ export default function (itemsName, api) {
     payload: item
   })
 
-  const setItemsCount = count => ({
-    type: Constants.SET_ITEMS_AMOUNT,
-    payload: count
-  })
-
-  const incrementItemsCount = () => ({ type: Constants.INCREMENT_ITEMS_AMOUNT })
-  const decrementItemsCount = () => ({ type: Constants.DECREMENT_ITEMS_AMOUNT })
-
   const setItemsLoading = (b) => ({
     type: Constants.SET_ITEMS_IS_LOADING,
     payload: b
   })
 
-  const updateItem = (id, data) => ({
+  const updateItem = (id, update) => ({
     type: Constants.UPDATE_ITEM,
     payload: {
       id,
@@ -45,9 +37,6 @@ export default function (itemsName, api) {
   return {
     [Actions.setItems]: setItems,
     [Actions.addItem]: addItem,
-    [Actions.setItemsCount]: setItemsCount,
-    [Actions.incrementItemsCount]: incrementItemsCount,
-    [Actions.decrementItemsCount]: decrementItemsCount,
     [Actions.setItemsLoading]: setItemsLoading,
     [Actions.updateItem]: updateItem,
     [Actions.deleteItem]: deleteItem,
@@ -55,15 +44,13 @@ export default function (itemsName, api) {
     [Actions.createItem]: data => async dispatch => {
       const res = await api.createItem(data)
       dispatch(addItem(res))
-      dispatch(incrementItemsCount())
     },
 
     [Actions.loadItems]: () => async dispatch => {
       dispatch(setItemsLoading(true))
       const res = await api.getItems()
-      localStorage.setItem(itemsName, JSON.stringify(res))
+      localStorage.setItem(itemsName, JSON.stringify({ items: res.items }))
       dispatch(setItems(res.items))
-      dispatch(setItemsCount(res.count))
       dispatch(setItemsLoading(false))
     },
 
@@ -72,7 +59,6 @@ export default function (itemsName, api) {
       await api.deleteItem(id)
       dispatch(updateItem(id, { isLoading: false }))
       dispatch(deleteItem(id))
-      dispatch(decrementItemsCount())      
     },
 
     [Actions.saveItem]: (id, update) => async dispatch => {
