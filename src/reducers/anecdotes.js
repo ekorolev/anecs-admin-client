@@ -5,7 +5,9 @@ import {
   DELETE_ANECDOTE,
   SET_ANECDOTE_LOADING,
   DECREMENT_ANECDOTES_COUNT,
-  UPDATE_ANECDOTE
+  UPDATE_ANECDOTE,
+  INCREMENT_ANECDOTES_COUNT,
+  ADD_ANECDOTE
 } from '../constants/ActionTypes'
 import { combineReducers } from 'redux'
 
@@ -31,6 +33,11 @@ const anecdotes = (state = [], action) => {
         }
         return Object.assign({}, anec)
       })
+    case ADD_ANECDOTE:
+      return [
+        action.payload,
+        ...state
+      ]
     default:
       return state
   }
@@ -42,6 +49,8 @@ const count = (state = 0, action) => {
       return action.payload
     case DECREMENT_ANECDOTES_COUNT:
       return --state
+    case INCREMENT_ANECDOTES_COUNT:
+      return ++state
     default:
       return state
   }

@@ -66,3 +66,10 @@ export const saveAnecdote = async (id, update) => {
     message: 'OK'
   }
 }
+
+export const createAnecdote = async (data) => {
+  await sleep(rnd(800,900))
+  let anec = gen(rnd(1000, 10000))
+  anec = { ...anec, ...data }
+  return anec
+}
