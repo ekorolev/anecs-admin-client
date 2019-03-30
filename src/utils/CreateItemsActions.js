@@ -41,9 +41,10 @@ export default function (itemsName, api) {
     [Actions.updateItem]: updateItem,
     [Actions.deleteItem]: deleteItem,
 
-    [Actions.createItem]: data => async dispatch => {
+    [Actions.createItem]: data => async (dispatch, getState) => {
       const res = await api.createItem(data)
       dispatch(addItem(res))
+      localStorage.setItem(itemsName, JSON.stringify({ items: getState()[itemsName].items }))
     },
 
     [Actions.loadItems]: () => async dispatch => {
@@ -54,18 +55,20 @@ export default function (itemsName, api) {
       dispatch(setItemsLoading(false))
     },
 
-    [Actions.removeItem]: id => async dispatch => {
+    [Actions.removeItem]: id => async (dispatch, getState) => {
       dispatch(updateItem(id, { isLoading: true }))
       await api.deleteItem(id)
       dispatch(updateItem(id, { isLoading: false }))
       dispatch(deleteItem(id))
+      localStorage.setItem(itemsName, JSON.stringify({ items: getState()[itemsName].items }))
     },
 
-    [Actions.saveItem]: (id, update) => async dispatch => {
+    [Actions.saveItem]: (id, update) => async (dispatch, getState) => {
       dispatch(updateItem(id, { isLoading: true }))
       await api.saveItem(id, update)
       dispatch(updateItem(id, update))
-      dispatch(updateItem(id, { isLoading: false }))      
+      dispatch(updateItem(id, { isLoading: false }))
+      localStorage.setItem(itemsName, JSON.stringify({ items: getState()[itemsName].items }))
     }
   }
 }

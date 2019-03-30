@@ -16,6 +16,7 @@ class PaperView extends React.Component {
     return (
       <MainLayout sideNav={<PapersNav/>}>
         <PaperCard
+          onUpdate={(id) => this.props.history.push(`/papers/update/${id}`)}
           onDelete={this.onDelete.bind(this)}
           data={paper}/>
       </MainLayout>

@@ -28,6 +28,12 @@ class PaperCard extends React.Component {
                   <Button
                     variant="info"
                     size="sm"
+                    onClick={() => this.props.onUpdate(this.props.data._id)}>
+                    Update  
+                  </Button>
+                  <Button
+                    variant="info"
+                    size="sm"
                     onClick={() => this.props.onDelete(this.props.data._id)}
                     disabled={this.props.data.isLoading}>
                     Delete  
