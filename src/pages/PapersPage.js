@@ -1,11 +1,11 @@
 import React from 'react'
 import MainLayout from '../layouts/MainLayout'
-import PagesNav from '../layouts/PagesNav'
+import PapersNav from '../layouts/PapersNav'
 
 export default function () {
   return (
-    <MainLayout sideNav={<PagesNav/>}>
-      Pages page
+    <MainLayout sideNav={<PapersNav/>}>
+      Papers page
     </MainLayout>
   )
 }

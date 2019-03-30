@@ -19,7 +19,7 @@ const HeadPanel = function(props) {
       <Navbar.Collapse>
         <Nav className="mr-auto">
           <Nav.Link href="#/anecdotes">Anecdotes</Nav.Link>
-          <Nav.Link href="#/pages">Pages</Nav.Link>
+          <Nav.Link href="#/papers">Papers</Nav.Link>
         </Nav>
       </Navbar.Collapse>
       <Navbar.Collapse className="justify-content-end">

@@ -5,7 +5,7 @@ import configureStore from './configureStore'
 
 import PrivateRoute from './utils/PrivateRoute'
 import AnecdotesPage from './pages/AnecdotesPage'
-import PagesPage from './pages/PagesPage'
+import PapersPage from './pages/PapersPage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
 import AnecdoteViewPage from './pages/AnecdoteViewPage'
@@ -30,7 +30,7 @@ class App extends Component {
           <PrivateRoute path="/anecdotes/create" component={AnecdoteCreate} />
           <PrivateRoute path="/anecdotes/show/:id" component={AnecdoteViewPage} />
           <PrivateRoute path="/anecdotes/:page?" component={AnecdotesPage} />
-          <PrivateRoute path="/pages" component={PagesPage} />
+          <PrivateRoute path="/papers" component={PapersPage} />
         </Switch>
       </Provider>
     )
