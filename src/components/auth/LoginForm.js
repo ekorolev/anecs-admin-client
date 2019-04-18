@@ -56,9 +56,14 @@ class LoginForm extends React.Component {
             onChange={this.onFieldChanged.bind(this)}
             placeholder="Password" />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
+        <div className="d-flex justify-content-between">
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+          <Button variant="link" href="#/register">
+            Register
+          </Button>        
+        </div>
       </Form>
     )
   }

@@ -19,13 +19,18 @@ class RegisterForm extends React.Component {
 
   onFieldChanged (event) {
     this.setState({
-      [event.name]: event.value
+      [event.target.name]: event.target.value
     })
+  }
+
+  handleSubmit (event) {
+    event.preventDefault()
+    this.props.onSubmit(this.state.username, this.state.password)
   }
 
   render () {
     return (
-      <Form onSubmit={this.props.onSubmit}>
+      <Form onSubmit={this.handleSubmit.bind(this)}>
         <h1>Register</h1>
         <Form.Group controlId="formBasicEmail">
           <Form.Control
